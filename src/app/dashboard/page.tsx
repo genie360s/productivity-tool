@@ -1,13 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import EditorJS from "@editorjs/editorjs";
-import Header from "@editorjs/header";
-import Checklist from "@editorjs/checklist";
-import List from "@editorjs/list";
-import Quote from '@editorjs/quote';
-import LinkTool from '@editorjs/link';
-import SimpleImage from "@editorjs/simple-image";
-import Embed from '@editorjs/embed';
+import MarkdownEditor from "../components/MarkdownTab";
+import TodoList from "../components/TodoLIst";
+import EditorTool from "../components/EditorTool";
+import QuillEditor from "../components/QuillEditor";
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("timeline");
@@ -72,71 +68,32 @@ const Dashboard: React.FC = () => {
 
 const TimelineComponent: React.FC = () => {
   return (
-    <div className="w-[50vw]" id="editorjs">
+    <div className="w-[50vw]" >
       Timeline Component
+     <QuillEditor />
     </div>
   );
 };
 
 const TodoListComponent: React.FC = () => {
-  return <div>To-Do List Component</div>;
+  return <div>To-Do List Component
+  <MarkdownEditor />
+  </div>;
 };
 
 const MentalRemindersComponent: React.FC = () => {
-  return <div>Mental Reminders Component</div>;
+  return <div>Mental Reminders Component
+     <EditorTool />
+  </div>;
 };
 
 const MyJournalComponent: React.FC = () => {
-  return <div>My Journal Component</div>;
+  return <div>My Journal Component
+    <TodoList />
+  </div>;
 };
 
-// some editor configuration
-// Function to wait for an element with a given ID to be available
-const waitForElement = async (editorjs: string) => {
-    while (!document.getElementById(editorjs)) {
-      await new Promise((resolve) => setTimeout(resolve, 100)); // Wait for 100 milliseconds
-    }
-  };
-  
-  // Async function to initialize EditorJS
-  const initializeEditor = async () => {
-    await waitForElement('editorjs');
-    
-    // Element with ID "editorjs" is now available
-    const editor = new EditorJS({
-      holder: 'editorjs',
-      // Other Editor.js configuration options
-      tools: {
-        header: Header,
-        image: SimpleImage,
-        embed: Embed,
-        checklist: {
-          class: Checklist,
-          inlineToolbar: true,
-        },
-        list: {
-          class: List,
-          inlineToolbar: true,
-          config: {
-            defaultStyle: 'unordered',
-          },
-        },
-        quote: {
-          class: Quote,
-          inlineToolbar: true,
-          shortcut: 'CMD+SHIFT+O',
-          config: {
-            quotePlaceholder: 'Enter a quote',
-            captionPlaceholder: 'Quote\'s author',
-          },
-        },
-      },
-    });
-  };
-  
-  // Call the async function to initialize EditorJS
-  initializeEditor();
-  
-//ends here
+
+
 
 export default Dashboard;
