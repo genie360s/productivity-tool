@@ -4,6 +4,7 @@ import MarkdownEditor from "../components/MarkdownTab";
 import TodoList from "../components/TodoLIst";
 import EditorTool from "../components/EditorTool";
 import QuillEditor from "../components/QuillEditor";
+import EditorComponent from "../components/TinyMce";
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("timeline");
@@ -68,28 +69,38 @@ const Dashboard: React.FC = () => {
 
 const TimelineComponent: React.FC = () => {
   return (
-    <div className="w-[50vw]" >
+    <div className="relative overflow-hidden p-5" >
       Timeline Component
+     <div className="">
      <QuillEditor />
+     </div>
     </div>
   );
 };
 
 const TodoListComponent: React.FC = () => {
-  return <div>To-Do List Component
-  <MarkdownEditor />
+  return <div className="">To-Do List Component
+    <div>
+    <TodoList />
+    </div>
+ 
   </div>;
 };
 
 const MentalRemindersComponent: React.FC = () => {
   return <div>Mental Reminders Component
-     <EditorTool />
+    <div>
+<EditorComponent />
+    </div>
+     
   </div>;
 };
 
 const MyJournalComponent: React.FC = () => {
-  return <div>My Journal Component
-    <TodoList />
+  return <div className="relative overflow-hidden p-5">My Journal Component
+   <div className="relative">
+   <EditorTool />
+   </div>
   </div>;
 };
 

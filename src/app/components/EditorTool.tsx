@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Checklist from "@editorjs/checklist";
@@ -8,6 +8,8 @@ import SimpleImage from "@editorjs/simple-image";
 import Embed from '@editorjs/embed';
 
 const EditorTool = () => {
+    const [isEditorInitialized, setIsEditorInitialized] = useState(false);
+
     useEffect(() => {
         const waitForElement = async () => {
             while (!document.getElementById('editorjs')) {
@@ -21,6 +23,7 @@ const EditorTool = () => {
             // Element with ID "editorjs" is now available
             new EditorJS({
                 holder: 'editorjs',
+                autofocus: true,
                 placeholder: 'Let`s write an awesome story!',
                 // Other Editor.js configuration options
                 tools: {
@@ -49,12 +52,16 @@ const EditorTool = () => {
                     },
                 },
             });
+
+            setIsEditorInitialized(true);
         };
 
-        initializeEditor();
-    }, []);
+        if (!isEditorInitialized) {
+            initializeEditor();
+        }
+    }, [isEditorInitialized]);
 
-    return <div id="editorjs"></div>;
+    return <div id="editorjs" className=""></div>;
 };
 
 export default EditorTool;

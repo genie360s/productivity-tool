@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import React, { useState, ChangeEvent } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 const MarkdownEditor: React.FC = () => {
-    const [markdown, setMarkdown] = useState(`Just a link: www.nasa.gov.`);
+    const [markdown, setMarkdown] = useState('');
 
-    const handleMarkdownChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setMarkdown(event.target.value);
+    const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setMarkdown(e.target.value);
     };
 
     return (
-        <div className="p-4">
-            <textarea
-                className="w-full h-40 p-2 border border-gray-300 rounded"
-                value={markdown}
-                onChange={handleMarkdownChange}
-            />
-            <div className="mt-4">
-                <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
+        <div className="markdown-editor">
+            <div className="editor">
+                <textarea
+                    placeholder="Write your Markdown here..."
+                    value={markdown}
+                    onChange={handleInputChange}
+                />
+            </div>
+            <div className="preview">
+                <ReactMarkdown>{markdown}</ReactMarkdown>
             </div>
         </div>
     );

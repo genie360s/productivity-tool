@@ -1,3 +1,4 @@
+// Add missing import
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -73,6 +74,7 @@ const TodoList = () => {
             <div className="flex items-center mb-4">
                 <input
                     type="text"
+                    id='add'
                     value={newTask}
                     onChange={(e) => setNewTask(e.target.value)}
                     onKeyDown={handleKeyDown} // Add the keydown event listener
@@ -87,18 +89,16 @@ const TodoList = () => {
                         <li
                             key={task.id}
                             className="flex items-center"
-                            style={{ textDecoration: task.task?.startsWith('✓') ? 'line-through' : 'none' }}
+                            
                         >
                             {editTaskId === task.id ? (
-                                <>
-                                    <input
-                                        type="text"
-                                        value={newTask}
-                                        onChange={(e) => setNewTask(e.target.value)}
-                                        onKeyDown={(e) => handleKeyDown(e)}
-                                        className="border border-gray-300 rounded px-2 py-1 mr-2"
-                                    />
-                                </>
+                                <input
+                                    type="text"
+                                    value={newTask}
+                                    onChange={(e) => setNewTask(e.target.value)}
+                                    onKeyDown={(e) => handleKeyDown(e)}
+                                    className="border border-gray-300 rounded px-2 py-1 mr-2"
+                                />
                             ) : (
                                 <>
                                     <input
@@ -107,16 +107,20 @@ const TodoList = () => {
                                         onChange={() => handleToggleTask(task.id)}
                                         className="mr-2"
                                     />
-                                    {task.task}
+                                    <span
+                                        style={{ textDecoration: task.task?.startsWith('✓') ? 'line-through' : 'none' }}
+                                    >
+                                        {task.task?.startsWith('✓') ? task.task.substring(2) : task.task}
+                                    </span>
                                     <button
                                         onClick={() => setEditTaskId(task.id)}
-                                        className="text-blue-500 ml-2"
+                                        className={`text-blue-500 ml-2 ${task.task?.startsWith('✓') ? 'no-underline' : ''}`}
                                     >
                                         Edit
                                     </button>
                                     <button
                                         onClick={() => handleDeleteTask(task.id)}
-                                        className="text-red-500 ml-2"
+                                        className={`text-red-500 ml-2 ${task.task?.startsWith('✓') ? 'no-underline' : ''}`}
                                     >
                                         Delete
                                     </button>

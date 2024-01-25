@@ -12,7 +12,7 @@ const modules = {
         [{ direction: "rtl" }],
         [{ size: ["small", false, "large", "huge"] }],
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        [{ color: [] }, { background: [] }],
+        
         [{ font: [] }],
         [{ align: [] }],
         ["clean"],
@@ -41,8 +41,8 @@ const formats = [
 
 const QuillEditor: React.FC = () => {
     return (
-        <div className="flex">
-            <ReactQuill modules={modules} formats={formats} theme="snow" />
+        <div className="relative">
+            <ReactQuill modules={modules} formats={formats} theme="snow"/>
         </div>
     );
 };
